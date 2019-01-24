@@ -11,10 +11,10 @@ import com.appleyk.node.Device;
 import com.appleyk.node.Location;
 import com.appleyk.node.Service;
 import com.appleyk.node.User;
-import com.appleyk.relation.LikeRelation;
+//import com.appleyk.relation.LikeRelation;
 import com.appleyk.relation.Provide;
 import com.appleyk.repository.DeviceRepository;
-import com.appleyk.repository.LikeRelationRepository;
+//import com.appleyk.repository.LikeRelationRepository;
 import com.appleyk.repository.LocationRepository;
 import com.appleyk.RelationRepository.ProvideRepository;
 import com.appleyk.repository.ServiceRepository;
@@ -32,47 +32,47 @@ public class testControl {
 	LocationRepository locationRepository;
 	@Autowired
 	ProvideRepository provideRepository;
-	@Autowired
-	LikeRelationRepository likeRepository;
+//	@Autowired
+//	LikeRelationRepository likeRepository;
 	
 	
 	@RequestMapping("/test3")
 	 public String index() { 
      return "Hello World 888";
 }
-	@RequestMapping("/cu")
-	public void creatUser() {
-		List<User> userNodes = new ArrayList<>();
-		User userNode1 = new User();
-		userNode1.setUid(1088L);
-		System.out.println(userNode1.getUid());
-		userNode1.setName("cafe");
-		System.out.println(userNode1.getName());
-		userNode1.setAge(22);
-		userNode1.setSex("boy");
-		userNode1.addHobby("play");
-		userNode1.addHobby("sleep");
+//	@RequestMapping("/cuu")
+//	public void creatUser() {
+//		List<User> userNodes = new ArrayList<>();
+//		User userNode1 = new User();
+//		userNode1.setUid(1088L);
+//		System.out.println(userNode1.getUid());
+//		userNode1.setName("cafe");
+//		System.out.println(userNode1.getName());
+//		userNode1.setAge(22);
+//		userNode1.setSex("boy");
+//		userNode1.addHobby("play");
+//		userNode1.addHobby("sleep");
+////		
+//		User userNode2 = new User();
+//		userNode2.setUid(1077L);
+//		userNode2.setName("more");
+//		userNode2.setAge(17);
+//		userNode2.setSex("girl");
+//		userNode2.addHobby("eat");
+//		userNode2.addHobby("see");
+//		userNode2.addHobby("say");
 //		
-		User userNode2 = new User();
-		userNode2.setUid(1077L);
-		userNode2.setName("more");
-		userNode2.setAge(17);
-		userNode2.setSex("girl");
-		userNode2.addHobby("eat");
-		userNode2.addHobby("see");
-		userNode2.addHobby("say");
-		
-		userNodes.add(userNode1);
-		userNodes.add(userNode2);			
-		Iterable<User> iterable = userRepository.save(userNodes);	
-//		User user=userRepository.save(userNode1);
-		for (User user : iterable) {
-			System.out.println("创建节点：【"+user.getName()+"】成功！");
-		}
-		
-		
-		
-	}
+//		userNodes.add(userNode1);
+//		userNodes.add(userNode2);			
+//		Iterable<User> iterable = userRepository.save(userNodes);	
+////		User user=userRepository.save(userNode1);
+//		for (User user : iterable) {
+//			System.out.println("创建节点：【"+user.getName()+"】成功！");
+//		}
+//		
+//		
+//		
+//	}
 	
 	
 	@RequestMapping("/cd")
@@ -152,44 +152,44 @@ public class testControl {
 //			}
 	}
 	
-	@RequestMapping("/testlike")
-	public void createLikeRelation() throws Exception {
-
-		LikeRelation like = new LikeRelation();
-
-		/**
-		 * 节点 == 刘大壮
-		 */
-		User startNode = new User();
-		startNode.setUid(1004L);
-
-		/**
-		 * 节点 == 马晓丽
-		 */
-		User endNode = new User();
-		endNode.setUid(1003L);
-
-		like.setStartNode(startNode);
-		like.setEndNode(endNode);
-
-		like.setRelationID(520);
-		like.setSince(2018);
-		like.setReason("晓丽是女神");
-
-		List<LikeRelation> likes = likeRepository.createLikes(startNode.getUid(), 
-				endNode.getUid(), like.getRelationID(),like.getSince(),like.getReason());	
-		
-		/**
-		 * 遍历创建的关系
-		 */
-		for (LikeRelation likeRelation : likes) {
-			User sNode = (User) likeRelation.getStartNode();
-			User eNode = (User) likeRelation.getEndNode();
-			System.out.println(sNode.getName() + "--喜欢-->" + eNode.getName());
-		}
-	}
-	
-	
+//	@RequestMapping("/testlike")
+//	public void createLikeRelation() throws Exception {
+//
+//		LikeRelation like = new LikeRelation();
+//
+//		/**
+//		 * 节点 == 刘大壮
+//		 */
+//		User startNode = new User();
+//		startNode.setUid(1004L);
+//
+//		/**
+//		 * 节点 == 马晓丽
+//		 */
+//		User endNode = new User();
+//		endNode.setUid(1003L);
+//
+//		like.setStartNode(startNode);
+//		like.setEndNode(endNode);
+//
+//		like.setRelationID(520);
+//		like.setSince(2018);
+//		like.setReason("晓丽是女神");
+//
+//		List<LikeRelation> likes = likeRepository.createLikes(startNode.getUid(), 
+//				endNode.getUid(), like.getRelationID(),like.getSince(),like.getReason());	
+//		
+//		/**
+//		 * 遍历创建的关系
+//		 */
+//		for (LikeRelation likeRelation : likes) {
+//			User sNode = (User) likeRelation.getStartNode();
+//			User eNode = (User) likeRelation.getEndNode();
+//			System.out.println(sNode.getName() + "--喜欢-->" + eNode.getName());
+//		}
+//	}
+//	
+//	
 	
 	
 	

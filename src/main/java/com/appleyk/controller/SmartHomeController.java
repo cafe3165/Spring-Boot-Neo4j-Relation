@@ -18,24 +18,16 @@ import com.appleyk.RelationRepository.ServiceLocatedIn;
 import com.appleyk.node.Context;
 import com.appleyk.node.Device;
 import com.appleyk.node.Location;
-import com.appleyk.node.User;
 import com.appleyk.node.Service;
-import com.appleyk.relation.Assign;
-import com.appleyk.relation.Increase;
-import com.appleyk.relation.LocatedIn;
-import com.appleyk.relation.Monitor;
-import com.appleyk.relation.Provide;
-import com.appleyk.relation.Reduce;
-import com.appleyk.relation.Sense;
+import com.appleyk.node.User;
 import com.appleyk.repository.ContextRepository;
 import com.appleyk.repository.DeviceRepository;
 import com.appleyk.repository.LocationRepository;
-import com.appleyk.repository.UserRepository;
-import com.appleyk.util.OutPutTime;
 import com.appleyk.repository.ServiceRepository;
+import com.appleyk.repository.UserRepository;
 
 @RestController
-public class SmartController {
+public class SmartHomeController {
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
@@ -64,9 +56,8 @@ public class SmartController {
 	SenseRepository senseRepository;
 	
 	
-	@RequestMapping("/cdevice")
-	
-	public void creatDevice() {
+	@RequestMapping("/createSmartHomeNode")
+	public void createSmartHomeNode(){
 		List<Device> devicesNodes = new ArrayList<>();
 		Device dNode1 = new Device();
 		dNode1.setNN("D1");
@@ -127,18 +118,13 @@ public class SmartController {
 		devicesNodes.add(dNode1);devicesNodes.add(dNode2);devicesNodes.add(dNode3);
 		devicesNodes.add(dNode4);devicesNodes.add(dNode5);devicesNodes.add(dNode6);
 		devicesNodes.add(dNode7);devicesNodes.add(dNode8);
-		Iterable<Device> iterable = deviceRepository.save(devicesNodes);	
-		for (Device d : iterable) {
-			System.out.println("创建节点：【"+d.getDName()+"】成功！");
-		}
-		
-		
-		
-	}
-	
-	@RequestMapping("/cservice")
-	
-	public void createService() {
+		deviceRepository.save(devicesNodes);	
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		List<Service> servicesNodes = new ArrayList<>();
 		//空调
 		Service service1=new Service(); 
@@ -309,18 +295,13 @@ public class SmartController {
 		servicesNodes.add(service10);servicesNodes.add(service11);servicesNodes.add(service12);
 		servicesNodes.add(service13);servicesNodes.add(service14);servicesNodes.add(service15);
 		servicesNodes.add(service16);servicesNodes.add(service17);servicesNodes.add(service18);
-		Iterable<Service> iterable = serviceRepository.save(servicesNodes);	
-		for (Service s : iterable) {
-			System.out.println("创建节点：【"+s.getName()+"】成功！");
-		}
-		
-		
-		serviceRepository.save(service1);
-		
-	}
-
-	@RequestMapping("/clocation")
-	public void createLocation() {
+		serviceRepository.save(servicesNodes);	
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		List<Location> locationsNodes = new ArrayList<>();
 
 		Location location1=new Location(); 
@@ -337,11 +318,12 @@ public class SmartController {
 		
 		locationsNodes.add(location1);locationsNodes.add(location2);locationsNodes.add(location3);
 		locationRepository.save(locationsNodes);
-		
-	}
-	
-	@RequestMapping("/cuser")
-	public void createUser() {
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		List<User> usersNodes = new ArrayList<>();
 		User uNode1 = new User();
 		uNode1.setUName("Jack");
@@ -370,15 +352,13 @@ public class SmartController {
 		
 		usersNodes.add(uNode1);usersNodes.add(uNode2);usersNodes.add(uNode3);
 		usersNodes.add(uNode4);usersNodes.add(uNode5);
-		Iterable<User> iterable = userRepository.save(usersNodes);	
-		for (User u : iterable) {
-			System.out.println("创建节点：【"+u.getUName()+"】成功！");
-		}
-		
-	}
-	
-	@RequestMapping("/ccontext")
-	public void createContext() {
+		userRepository.save(usersNodes);	
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		List<Context> contextsNodes = new ArrayList<>();
 		Context cNode11 = new Context();
 		cNode11.setUName("Jack");
@@ -494,74 +474,25 @@ public class SmartController {
 		contextsNodes.add(cNode42);contextsNodes.add(cNode43);
 		contextsNodes.add(cNode52);contextsNodes.add(cNode53);
 		
-		Iterable<Context> iterable = contextRepository.save(contextsNodes);	
-		for (Context c : iterable) {
-			System.out.println("创建节点：【"+c.getNN()+"】成功！");
-		}
+		contextRepository.save(contextsNodes);	
+		
+		
+		
 		
 	}
 	
-	
-	
-	
-	
-	@RequestMapping("/cdps")
-	public void createDeviceProvideService() {
-		List<Provide> provides = provideRepository.createProvide();	
-		OutPutTime.outPutTime();
+	@RequestMapping("/createSmartHomeRelation")
+	public void createSmartHomeRelation() {
+		provideRepository.createProvide();	
+		locatedInRepository.createlocatedIn();
+		serviceLocatedInRepository.createservicelocatedIn();
+		monitorRepository.createMonitor();
+		increaseRepository.createIncrease();
+		reduceRepository.createReduce();
+		assignRepository.createAssign();
+		senseRepository.createSense();
 	}
 	
 	
-	@RequestMapping("/cdll")
-    public void createDeviceLocatedInLocation() {
-		List<LocatedIn> locatedIn = locatedInRepository.createlocatedIn();	
-		OutPutTime.outPutTime();
-	}
-	
-	
-	@RequestMapping("/csll")
-	public void createServiceLocatedInLocation() {
-		List<LocatedIn> locatedIn = serviceLocatedInRepository.createservicelocatedIn();
-		OutPutTime.outPutTime();
-	}
-		
-	@RequestMapping("/cm")	
-	public void createMonitor() {
-		List<Monitor> monitor = monitorRepository.createMonitor();
-		OutPutTime.outPutTime();
-	}
-	
-	@RequestMapping("/ci")	
-	public void createIncrese() {
-		List<Increase> increase = increaseRepository.createIncrease();
-		OutPutTime.outPutTime();
-	}
-	
-	@RequestMapping("/cr")
-	public void createReduce() {
-		List<Reduce> reduce = reduceRepository.createReduce();
-		OutPutTime.outPutTime();
 
-	}
-	
-	@RequestMapping("/ca")
-	public void createAssign() {
-		List<Assign> assign = assignRepository.createAssign();
-		OutPutTime.outPutTime();
-	}
-	
-	@RequestMapping("/cse")
-	public void createSense() {
-		List<Sense> senses = senseRepository.createSense();
-		OutPutTime.outPutTime();
-//		for (Sense s : senses) {
-//			System.out.println(s.getStartNode()+"->"+s.getEndNode());
-//		}
-	}
-	
-	
-	
-	
 }
-	
-

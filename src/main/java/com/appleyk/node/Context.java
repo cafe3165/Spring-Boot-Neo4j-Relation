@@ -1,17 +1,20 @@
 package com.appleyk.node;
 
-
 import org.neo4j.ogm.annotation.GraphId;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class User {
+public class Context {
 	@GraphId
 	private Long id;
 	private String NN;
 	private String UName;
 	private String LName;
+	private String CType;
+	private double Value;
+	private double RMin;
+	private double RMax;
 	public Long getId() {
 		return id;
 	}
@@ -36,10 +39,30 @@ public class User {
 	public void setLName(String lName) {
 		LName = lName;
 	}
+	public String getCType() {
+		return CType;
+	}
+	public void setCType(String cType) {
+		CType = cType;
+	}
+	public double getValue() {
+		return Value;
+	}
+	public void setValue(double value) {
+		Value = value;
+	}
+	public double getRMin() {
+		return RMin;
+	}
+	public void setRMin(double rMin) {
+		RMin = rMin;
+	}
+	public double getRMax() {
+		return RMax;
+	}
+	public void setRMax(double rMax) {
+		RMax = rMax;
+	}
 	
 	
-	
-
-
-
 }
