@@ -18,7 +18,7 @@ import com.appleyk.relation.Provide;
 import com.appleyk.repository.DeviceRepository;
 //import com.appleyk.repository.LikeRelationRepository;
 import com.appleyk.repository.LocationRepository;
-import com.ConfigGenerate.LocationReader;
+import com.ConfigGenerate.ConfigReader;
 import com.appleyk.RelationRepository.ProvideRepository;
 import com.appleyk.repository.ServiceRepository;
 import com.appleyk.repository.UserRepository;
@@ -83,7 +83,7 @@ public class testControl {
 
 	@RequestMapping("/cl")
 	public void createLocation() {
-		LocationReader dom4jParser = new LocationReader(new File("Location.xml"));
+		ConfigReader dom4jParser = new ConfigReader(new File("Location.xml"));
 		List<HashMap<String, String>> lMaps=dom4jParser.traversalDocumentByIterator();
 		List<Location> l = new ArrayList<>();
 		for (int i = 0; i < lMaps.size(); i++) {
@@ -99,7 +99,7 @@ public class testControl {
 	
 	@RequestMapping("/cuu")
 	public void createUser() {
-		LocationReader dom4jParser = new LocationReader(new File("User.xml"));
+		ConfigReader dom4jParser = new ConfigReader(new File("User.xml"));
 		List<HashMap<String, String>> uMaps=dom4jParser.traversalDocumentByIterator();
 		List<User> u = new ArrayList<>();
 		for (int i = 0; i < uMaps.size(); i++) {
@@ -115,6 +115,23 @@ public class testControl {
 	
 	@RequestMapping("/cdd")
 	public void createDevice() {
+		ConfigReader dom4jParser = new ConfigReader(new File("Device.xml"));
+		List<HashMap<String, String>> dMaps=dom4jParser.traversalDocumentByIterator();
+		List<Device> d = new ArrayList<>();
+		for (int i = 0; i < dMaps.size(); i++) {
+			HashMap<String, String> map=dMaps.get(i);
+			Device device = new Device();
+			device.setNN(map.get("NN"));
+			device.setLName(map.get("LName"));
+			device.setDName(map.get("DName"));
+			device.setKey(map.get("Key"));
+			double Value=Double.valueOf(map.get("Value").toString());
+			device.setValue(Value);
+			
+			d.add(device);
+		}
+		deviceRepository.save(d);
+		
 		
 	}
 	

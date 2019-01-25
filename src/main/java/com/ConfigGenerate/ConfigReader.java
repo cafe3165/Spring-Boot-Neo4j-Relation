@@ -12,11 +12,11 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-public class LocationReader {
+public class ConfigReader {
 
 	private File inputXml;
 
-	public LocationReader(File inputXml) {
+	public ConfigReader(File inputXml) {
 		this.inputXml = inputXml;
 	}
 
