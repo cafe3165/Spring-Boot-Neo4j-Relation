@@ -43,89 +43,110 @@ public class testControl {
 		return "Hello World 888";
 	}
 
-	@RequestMapping("/cd")
-	public void creatDevice() {
-		List<Device> devicesNodes = new ArrayList<>();
-		Device dNode1 = new Device();
-		dNode1.setNN("D5");
-		dNode1.setDName("Airconditioner");
-		dNode1.setLName("bedroom");
-		dNode1.setKey("Temperature");
-		dNode1.setValue(22);
+//	@RequestMapping("/cd")
+//	public void creatDevice() {
+//		List<Device> devicesNodes = new ArrayList<>();
+//		Device dNode1 = new Device();
+//		dNode1.setNN("D5");
+//		dNode1.setDName("Airconditioner");
+//		dNode1.setLName("bedroom");
+//		dNode1.setKey("Temperature");
+//		dNode1.setValue(22);
+//
+////		Device dNode2 = new Device();
+////		dNode2.setName("Light");
+////		dNode2.setDescribe("This is a light.");
+////		
+//		devicesNodes.add(dNode1);
+////		devicesNodes.add(dNode2);			
+//		Iterable<Device> iterable = deviceRepository.save(devicesNodes);
+//////		User user=userRepository.save(userNode1);
+//		for (Device d : iterable) {
+//			System.out.println("创建节点：【" + d.getDName() + "】成功！");
+//		}
+//
+//	}
 
-//		Device dNode2 = new Device();
-//		dNode2.setName("Light");
-//		dNode2.setDescribe("This is a light.");
-//		
-		devicesNodes.add(dNode1);
-//		devicesNodes.add(dNode2);			
-		Iterable<Device> iterable = deviceRepository.save(devicesNodes);
-////		User user=userRepository.save(userNode1);
-		for (Device d : iterable) {
-			System.out.println("创建节点：【" + d.getDName() + "】成功！");
-		}
-
-	}
-
-	@RequestMapping("/cs")
-	public void createService() {
-		Service service = new Service();
-		service.setName("S54");
-		service.setLName("bedroom");
-		service.setCType("Temperature");
-		service.setEffect("Assign");
-		service.setDName("Airconditioner");
-		service.setState("on");
-		service.setValue(22);
-		serviceRepository.save(service);
-
-	}
+//	@RequestMapping("/cs")
+//	public void createService() {
+//		Service service = new Service();
+//		service.setName("S54");
+//		service.setLName("bedroom");
+//		service.setCType("Temperature");
+//		service.setEffect("Assign");
+//		service.setDName("Airconditioner");
+//		service.setState("on");
+//		service.setValue(22);
+//		serviceRepository.save(service);
+//
+//	}
 
 	@RequestMapping("/cl")
 	public void createLocation() {
 		LocationReader dom4jParser = new LocationReader(new File("Location.xml"));
 		List<HashMap<String, String>> lMaps=dom4jParser.traversalDocumentByIterator();
-		String NN ="",LName = "";
 		List<Location> l = new ArrayList<>();
-		for (int i = 0; i < 3; i++) {
-			HashMap<String, String> map=lMaps.get(i);
-			NN=map.get("NN");
-			LName=map.get("LName");
+		for (int i = 0; i < lMaps.size(); i++) {
+			HashMap<String, String> map=lMaps.get(i);			
 			Location location = new Location();
-			location.setNN(NN);
-			location.setLName(LName);
+			location.setNN(map.get("NN"));
+			location.setLName(map.get("LName"));
 			l.add(location);
 		}
 		locationRepository.save(l);
 
 	}
-
-	@RequestMapping("/dps")
-	public void createDeviceProvideService() {
-		System.out.println("666");
-		Provide provide = new Provide();
-		Device startNode = new Device();
-		startNode.setDName("Airconditioner");
-//
-		Service endNode = new Service();
-		endNode.setDName("Airconditioner");
-//
-		provide.setStartNode(startNode);
-		provide.setEndNode(endNode);
-		System.out.println(startNode.getDName());
-		System.out.println(endNode.getDName());
-//
-		List<Provide> provides = provideRepository.createLikes(startNode.getDName(), endNode.getDName());
-//			
-//			/**
-//			 * 遍历创建的关系
-//			 */
-//			for (Provide p : provides) {
-//				Device d = (Device) p.getStartNode();
-//				Service s = (Service) p.getEndNode();
-//				System.out.println(d.getDName() + "--喜欢-->" + s.getName());
-//			}
+	
+	@RequestMapping("/cuu")
+	public void createUser() {
+		LocationReader dom4jParser = new LocationReader(new File("User.xml"));
+		List<HashMap<String, String>> uMaps=dom4jParser.traversalDocumentByIterator();
+		List<User> u = new ArrayList<>();
+		for (int i = 0; i < uMaps.size(); i++) {
+			HashMap<String, String> map=uMaps.get(i);
+			User user = new User();
+			user.setNN(map.get("NN"));
+			user.setLName(map.get("LName"));
+			user.setUName(map.get("UName"));
+			u.add(user);
+		}
+		userRepository.save(u);
 	}
+	
+	@RequestMapping("/cdd")
+	public void createDevice() {
+		
+	}
+	
+	
+	
+
+//	@RequestMapping("/dps")
+//	public void createDeviceProvideService() {
+//		System.out.println("666");
+//		Provide provide = new Provide();
+//		Device startNode = new Device();
+//		startNode.setDName("Airconditioner");
+////
+//		Service endNode = new Service();
+//		endNode.setDName("Airconditioner");
+////
+//		provide.setStartNode(startNode);
+//		provide.setEndNode(endNode);
+//		System.out.println(startNode.getDName());
+//		System.out.println(endNode.getDName());
+////
+//		List<Provide> provides = provideRepository.createLikes(startNode.getDName(), endNode.getDName());
+////			
+////			/**
+////			 * 遍历创建的关系
+////			 */
+////			for (Provide p : provides) {
+////				Device d = (Device) p.getStartNode();
+////				Service s = (Service) p.getEndNode();
+////				System.out.println(d.getDName() + "--喜欢-->" + s.getName());
+////			}
+//	}
 
 //	@RequestMapping("/testlike")
 //	public void createLikeRelation() throws Exception {
