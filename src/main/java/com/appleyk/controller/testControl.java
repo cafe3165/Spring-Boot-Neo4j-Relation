@@ -134,6 +134,12 @@ public class testControl {
 		
 		
 	}
+	@RequestMapping("ccc")
+	public void createContext() {
+		ConfigReader dom4jParser = new ConfigReader(new File("Device.xml"));
+		List<HashMap<String, String>> cMaps=dom4jParser.traversalDocumentByIterator();
+//		List<Device> c = new ArrayList<>();
+	}
 	
 	
 	
