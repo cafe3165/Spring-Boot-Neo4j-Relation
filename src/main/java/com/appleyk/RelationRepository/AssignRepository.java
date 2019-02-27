@@ -18,3 +18,5 @@ public interface AssignRepository extends GraphRepository<Assign>{
 			+ " CREATE p = (s)-[r:Assign]->(c) return p ")
 	List<Assign> createAssign();
 }
+
+
